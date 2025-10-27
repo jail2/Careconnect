@@ -90,13 +90,40 @@ body {
 }
 
 /* 기존 내용은 모두 지우고 아래 내용으로 교체해주세요. */
-.App {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #f8f9fa;
+:root {
+  /* 라이트 모드 변수 */
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --header-bg: #f8f9fa;
+  --header-text: #2d3436;
+  --chinese-text: #2c3e50; /* 중국어 텍스트 색상 (대비 향상) */
 }
 
+.dark-mode {
+  /* 다크모드 변수 */
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --header-bg: #2d2d2d;
+  --header-text: #ffffff;
+  --chinese-text: #e0e0e0; /* 중국어 텍스트 색상 (대비 향상) */
+}
+
+.App {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+/* 상단바 스타일 */
+.header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+}
+
+/* 중국어 텍스트 특정 스타일 */
+.chinese-text {
+  color: var(--chinese-text);
+}
 .app-main {
   flex-grow: 1;
 }

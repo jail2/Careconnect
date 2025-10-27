@@ -9,6 +9,8 @@ import QA from './pages/QA';
 import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
 import { Navigate } from 'react-router-dom';
+import { DarkModeProvider } from './contexts/DarkModeContext';
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(() => {

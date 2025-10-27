@@ -1,8 +1,11 @@
 import React from 'react';
 import './Home.css';
 import heroImage from '../assets/dohun.jpg';
+import { useDarkMode } from '../contexts/DarkModeContext';
 
 function Home() {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   return (
     <div className="home-container">
       <div className="hero-text">
@@ -12,6 +15,12 @@ function Home() {
       <div className="hero-image">
         <img src={heroImage} alt="Hero Illustration" />
       </div>
+      <button 
+        onClick={toggleDarkMode} 
+        className="dark-mode-toggle"
+      >
+        {isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+      </button>
     </div>
   );
 }
