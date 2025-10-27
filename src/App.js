@@ -88,15 +88,15 @@ function App() {
 
 export default App;
 
-### src/pages/AdminPage.js
-Remove the unused `handleAnswerSubmit` function or use it in a form:
+// ### src/pages/AdminPage.js
+// Remove the unused `handleAnswerSubmit` function or use it in a form:
 ```js:%2Fd%3A%5Ccareconnect%5Csrc%5Cpages%5CAdminPage.js
 // Remove this line if not used:
 const handleAnswerSubmit = () => { /* ... */ };
 ```
 
-### src/pages/Dictionary.js
-Remove unused state and add the missing dependency in `useCallback`:
+// ### src/pages/Dictionary.js
+// Remove unused state and add the missing dependency in `useCallback`:
 ```js:%2Fd%3A%5Ccareconnect%5Csrc%5Cpages%5CDictionary.js
 // Remove these lines:
 const [showRelated, setShowRelated] = useState(false);

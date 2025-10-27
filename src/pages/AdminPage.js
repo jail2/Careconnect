@@ -19,7 +19,8 @@ function AdminPage({ questions, addAnswer, deleteQuestion }) {
     }
   };
 
-  const handleAnswerSubmit = (e) => {
+  // handleAnswerSubmit 함수는 사용 중이므로 제거하지 않습니다.
+  const handleAnswerSubmit = async (answerText) => {
     e.preventDefault();
     if (answer.trim() === '' || selectedQuestionId === null) return;
     addAnswer(selectedQuestionId, answer);

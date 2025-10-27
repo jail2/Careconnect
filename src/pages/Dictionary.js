@@ -168,66 +168,48 @@ function Dictionary() {
     const saved = localStorage.getItem('dictionary-darkmode');
     return saved ? JSON.parse(saved) : false;
   });
-  const [showRelated, setShowRelated] = useState(false);
+  // ...existing code ...
   
-  const debouncedQuery = useDebounce(query, 300);
-
-  // 다크모드 토글
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    localStorage.setItem('dictionary-darkmode', JSON.stringify(newMode));
-  };
-
-  // 즐겨찾기 토글
-  const toggleFavorite = (termKey) => {
-    const newFavorites = favorites.includes(termKey)
-      ? favorites.filter(f => f !== termKey)
-      : [...favorites, termKey];
-    setFavorites(newFavorites);
-    localStorage.setItem('dictionary-favorites', JSON.stringify(newFavorites));
-  };
-
-  // 최근 검색어 추가
-  const addToRecentSearches = (term) => {
-    const newRecent = [term, ...recentSearches.filter(r => r !== term)].slice(0, 5);
-    setRecentSearches(newRecent);
-    localStorage.setItem('dictionary-recent', JSON.stringify(newRecent));
-  };
-
+  const debouncedQuery = useDebounce(
+    query,
+    300
+  );
+  
   // 검색 함수
-  const search = useCallback((searchTerm) => {
-    const lowerCaseSearchTerm = searchTerm.toLowerCase().trim();
-    if (!lowerCaseSearchTerm) {
-      setResults([]);
-      return;
-    }
-
-    const isChineseQuery = /[一-龥]/.test(lowerCaseSearchTerm);
-
-    let foundResults = Object.entries(db).filter(([key, term]) => {
-      const matchesCategory = selectedCategory === 'all' || term.category === selectedCategory;
-      const matchesKorean = term.search_terms.some(st => st.toLowerCase().includes(lowerCaseSearchTerm));
-      const matchesChinese = isChineseQuery && term.term_zh && term.term_zh.toLowerCase().includes(lowerCaseSearchTerm);
+  const search = useCallback(
+    (searchTerm) => {
+      const lowerCaseSearchTerm = searchTerm.toLowerCase().trim();
+      if (!lowerCaseSearchTerm) {
+        setResults([]);
+        return;
+      }
+  
+      const isChineseQuery = /[一-龥]/.test(lowerCaseSearchTerm);
+  
+      let foundResults = Object.entries(db).filter(([key, term]) => {
+        const matchesCategory = selectedCategory === 'all' || term.category === selectedCategory;
+        const matchesKorean = term.search_terms.some(st => st.toLowerCase().includes(lowerCaseSearchTerm));
+        const matchesChinese = isChineseQuery && term.term_zh && term.term_zh.toLowerCase().includes(lowerCaseSearchTerm);
+        
+        return matchesCategory && (matchesKorean || matchesChinese);
+      }).map(([key, term]) => ({ ...term, key }));
+  
+      setResults(foundResults);
       
-      return matchesCategory && (matchesKorean || matchesChinese);
-    }).map(([key, term]) => ({ ...term, key }));
-
-    setResults(foundResults);
-    
-    if (foundResults.length > 0) {
-      addToRecentSearches(searchTerm);
-    }
-  }, [selectedCategory]);
-
+      if (foundResults.length > 0) {
+        addToRecentSearches(searchTerm);
+      }
+    }, [addToRecentSearches] // addToRecentSearches를 의존성 배열에 추가합니다.
+  );
+  
   useEffect(() => {
     search(debouncedQuery);
   }, [debouncedQuery, search]);
-
+  
   const handleSuggestionClick = (term) => {
     setQuery(term);
   };
-
+  
   const highlightMatch = (text, highlight) => {
     if (!highlight || !text) return text;
     const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
@@ -243,7 +225,7 @@ function Dictionary() {
       </span>
     );
   };
-
+  
   // 음성 발음 재생
   const playPronunciation = (text) => {
     if ('speechSynthesis' in window) {
@@ -252,14 +234,14 @@ function Dictionary() {
       speechSynthesis.speak(utterance);
     }
   };
-
+  
   // 관련 용어 가져오기
   const getRelatedTerms = (termKey) => {
     const term = db[termKey];
     if (!term || !term.related_terms) return [];
     return term.related_terms.map(key => ({ key, ...db[key] })).filter(Boolean);
   };
-
+  
   // 다크모드 적용을 body에도 반영
   useEffect(() => {
     if (isDarkMode) {
@@ -273,11 +255,11 @@ function Dictionary() {
       document.body.classList.remove('dark-mode');
     };
   }, [isDarkMode]);
-
+  
   const isChineseQuery = /[一-龥]/.test(query);
   const currentTexts = isChineseQuery ? uiTexts.zh : uiTexts.ko;
   const currentSuggestedTerms = isChineseQuery ? suggestedTermsZh : suggestedTerms;
-
+  
   return (
     <div className={`page-container ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="page-header">
