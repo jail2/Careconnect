@@ -174,6 +174,36 @@ function Dictionary() {
     query,
     300
   );
+
+  // 최근 검색어에 추가하는 함수
+  const addToRecentSearches = useCallback((searchTerm) => {
+    setRecentSearches(prev => {
+      const filtered = prev.filter(term => term !== searchTerm);
+      const updated = [searchTerm, ...filtered].slice(0, 5);
+      localStorage.setItem('dictionary-recent', JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
+
+  // 다크모드 토글 함수
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const newMode = !prev;
+      localStorage.setItem('dictionary-darkmode', JSON.stringify(newMode));
+      return newMode;
+    });
+  };
+
+  // 즐겨찾기 토글 함수
+  const toggleFavorite = (termKey) => {
+    setFavorites(prev => {
+      const updated = prev.includes(termKey) 
+        ? prev.filter(key => key !== termKey)
+        : [...prev, termKey];
+      localStorage.setItem('dictionary-favorites', JSON.stringify(updated));
+      return updated;
+    });
+  };
   
   // 검색 함수
   const search = useCallback(
@@ -199,7 +229,7 @@ function Dictionary() {
       if (foundResults.length > 0) {
         addToRecentSearches(searchTerm);
       }
-    }, [selectedCategory, addToRecentSearches] // addToRecentSearches를 의존성 배열에 추가합니다.
+    }, [selectedCategory, addToRecentSearches]
   );
   
   useEffect(() => {

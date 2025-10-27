@@ -75,6 +75,24 @@ function AdminPage({ questions, addAnswer, deleteQuestion }) {
               </button>
             </div>
           ))}
+          
+          {selectedQuestionId && (
+            <form onSubmit={handleAnswerSubmit} style={{marginTop: '20px', padding: '20px', border: '1px solid #ddd', borderRadius: '5px'}}>
+              <h4>답변 작성</h4>
+              <textarea
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                placeholder="답변을 입력하세요..."
+                style={{width: '100%', minHeight: '100px', marginBottom: '10px'}}
+              />
+              <div>
+                <button type="submit">답변 저장</button>
+                <button type="button" onClick={() => setSelectedQuestionId(null)} style={{marginLeft: '10px'}}>
+                  취소
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>
