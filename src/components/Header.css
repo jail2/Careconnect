@@ -1,0 +1,33 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.app-nav a {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #34495e;
+  font-weight: 500;
+  font-size: 1em;
+  transition: color 0.3s ease;
+}
+
+.app-nav a:hover {
+  color: #1abc9c;
+}
