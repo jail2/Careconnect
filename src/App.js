@@ -63,25 +63,44 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
-        <Header user={user} setUser={setUser} />
-        <main className="app-main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/chinese-medicine" element={<ChineseMedicine />} />
-            <Route path="/nursing" element={<Nursing />} />
-            <Route path="/dictionary" element={<Dictionary />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route 
-              path="/qa"
-              element={user ? <QA questions={questions} addQuestion={addQuestion} /> : <Navigate to="/login" />}
-            />
-            <Route path="/admin" element={<AdminPage questions={questions} addAnswer={addAnswer} deleteQuestion={deleteQuestion} />} />
-          </Routes>
-        </main>
-      </div>
+      <DarkModeProvider>
+        <div className="App">
+          <Header user={user} setUser={setUser} />
+          <main className="app-main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/chinese-medicine" element={<ChineseMedicine />} />
+              <Route path="/nursing" element={<Nursing />} />
+              <Route path="/dictionary" element={<Dictionary />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route 
+                path="/qa"
+                element={user ? <QA questions={questions} addQuestion={addQuestion} /> : <Navigate to="/login" />}
+              />
+              <Route path="/admin" element={<AdminPage questions={questions} addAnswer={addAnswer} deleteQuestion={deleteQuestion} />} />
+            </Routes>
+          </main>
+        </div>
+      </DarkModeProvider>
     </Router>
   );
 }
 
 export default App;
+
+### src/pages/AdminPage.js
+Remove the unused `handleAnswerSubmit` function or use it in a form:
+```js:%2Fd%3A%5Ccareconnect%5Csrc%5Cpages%5CAdminPage.js
+// Remove this line if not used:
+const handleAnswerSubmit = () => { /* ... */ };
+```
+
+### src/pages/Dictionary.js
+Remove unused state and add the missing dependency in `useCallback`:
+```js:%2Fd%3A%5Ccareconnect%5Csrc%5Cpages%5CDictionary.js
+// Remove these lines:
+const [showRelated, setShowRelated] = useState(false);
+const handleSearch = useCallback((query) => {
+  // ... existing code ...
+}, [addToRecentSearches]); // Add 'addToRecentSearches' to dependencies
+```
