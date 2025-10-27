@@ -168,7 +168,7 @@ function Dictionary() {
     const saved = localStorage.getItem('dictionary-darkmode');
     return saved ? JSON.parse(saved) : false;
   });
-  // ...existing code ...
+  // const [showRelated, setShowRelated] = useState(false); // 이 줄을 제거합니다.
   
   const debouncedQuery = useDebounce(
     query,
@@ -199,7 +199,7 @@ function Dictionary() {
       if (foundResults.length > 0) {
         addToRecentSearches(searchTerm);
       }
-    }, [addToRecentSearches] // addToRecentSearches를 의존성 배열에 추가합니다.
+    }, [selectedCategory, addToRecentSearches] // addToRecentSearches를 의존성 배열에 추가합니다.
   );
   
   useEffect(() => {

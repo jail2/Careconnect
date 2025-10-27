@@ -87,21 +87,3 @@ function App() {
 }
 
 export default App;
-
-// 다음 라인들을 제거합니다.
-// ### src/pages/AdminPage.js
-// Remove the unused `handleAnswerSubmit` function or use it in a form:
-// ```js:%252Fd%253A%255Ccareconnect%255Csrc%255Cpages%255CAdminPage.js
-// // Remove this line if not used:
-// const handleAnswerSubmit = () => { /* ... */ };
-// ```
-
-// ### src/pages/Dictionary.js
-// Remove unused state and add the missing dependency in `useCallback`:
-// ```js:%252Fd%253A%255Ccareconnect%255Csrc%255Cpages%255CDictionary.js
-// // Remove these lines:
-// const [showRelated, setShowRelated] = useState(false);
-// const handleSearch = useCallback((query) => {
-  // ... existing code ...
-( [addToRecentSearches]); // Add 'addToRecentSearches' to dependencies
-// ```
