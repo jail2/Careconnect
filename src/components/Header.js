@@ -18,6 +18,7 @@ function Header({ user, setUser }) {
         <Link to="/nursing">현대 간호</Link>
         <Link to="/dictionary">용어 사전</Link>
         <Link to="/qa">Q&A</Link>
+        <Link to="/about">팀 소개</Link>
         <Link to="/admin">관리자</Link>
       </nav>
       <div className="auth-section">

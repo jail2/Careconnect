@@ -14,11 +14,11 @@ function Home() {
           <p>사랑과 정성이 가득한 분위기로 어려움을 지닌 환자분들의 행복하고<br />건강한 삶을 위해 항상 노력합니다.</p>
         </div>
         <div className="hero-image">
-          <img src={heroImage} alt="Hero Illustration" />
+          <img src={heroImage} alt="의료진 이미지" />
         </div>
       </div>
-      <button 
-        onClick={toggleDarkMode} 
+      <button
+        onClick={toggleDarkMode}
         className="dark-mode-toggle"
         aria-label={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
       >

@@ -6,6 +6,7 @@ import ChineseMedicine from './pages/ChineseMedicine';
 import Nursing from './pages/Nursing';
 import Dictionary from './pages/Dictionary';
 import QA from './pages/QA';
+import About from './pages/About';
 import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
 
@@ -72,11 +73,9 @@ function App() {
               <Route path="/chinese-medicine" element={<ChineseMedicine />} />
               <Route path="/nursing" element={<Nursing />} />
               <Route path="/dictionary" element={<Dictionary />} />
+              <Route path="/qa" element={<QA questions={questions} addQuestion={addQuestion} />} />
+              <Route path="/about" element={<About />} />
               <Route path="/login" element={<LoginPage setUser={setUser} />} />
-              <Route 
-                path="/qa"
-                element={<QA questions={questions} addQuestion={addQuestion} />}
-              />
               <Route path="/admin" element={<AdminPage questions={questions} addAnswer={addAnswer} deleteQuestion={deleteQuestion} />} />
             </Routes>
           </main>
