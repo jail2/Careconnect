@@ -8,7 +8,7 @@ import Dictionary from './pages/Dictionary';
 import QA from './pages/QA';
 import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
-import { Navigate } from 'react-router-dom';
+
 import { DarkModeProvider } from './contexts/DarkModeContext';
 import './App.css';
 
@@ -72,10 +72,10 @@ function App() {
               <Route path="/chinese-medicine" element={<ChineseMedicine />} />
               <Route path="/nursing" element={<Nursing />} />
               <Route path="/dictionary" element={<Dictionary />} />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/login" element={<LoginPage setUser={setUser} />} />
               <Route 
                 path="/qa"
-                element={user ? <QA questions={questions} addQuestion={addQuestion} /> : <Navigate to="/login" />}
+                element={<QA questions={questions} addQuestion={addQuestion} />}
               />
               <Route path="/admin" element={<AdminPage questions={questions} addAnswer={addAnswer} deleteQuestion={deleteQuestion} />} />
             </Routes>

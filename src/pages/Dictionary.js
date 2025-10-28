@@ -164,10 +164,7 @@ function Dictionary() {
     const saved = localStorage.getItem('dictionary-recent');
     return saved ? JSON.parse(saved) : [];
   });
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem('dictionary-darkmode');
-    return saved ? JSON.parse(saved) : false;
-  });
+
   // const [showRelated, setShowRelated] = useState(false); // 이 줄을 제거합니다.
   
   const debouncedQuery = useDebounce(
@@ -185,14 +182,7 @@ function Dictionary() {
     });
   }, []);
 
-  // 다크모드 토글 함수
-  const toggleDarkMode = () => {
-    setIsDarkMode(prev => {
-      const newMode = !prev;
-      localStorage.setItem('dictionary-darkmode', JSON.stringify(newMode));
-      return newMode;
-    });
-  };
+
 
   // 즐겨찾기 토글 함수
   const toggleFavorite = (termKey) => {
@@ -272,34 +262,17 @@ function Dictionary() {
     return term.related_terms.map(key => ({ key, ...db[key] })).filter(Boolean);
   };
   
-  // 다크모드 적용을 body에도 반영
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
-    
-    // 컴포넌트 언마운트 시 정리
-    return () => {
-      document.body.classList.remove('dark-mode');
-    };
-  }, [isDarkMode]);
+
   
   const isChineseQuery = /[一-龥]/.test(query);
   const currentTexts = isChineseQuery ? uiTexts.zh : uiTexts.ko;
   const currentSuggestedTerms = isChineseQuery ? suggestedTermsZh : suggestedTerms;
   
   return (
-    <div className={`page-container ${isDarkMode ? 'dark-mode' : ''}`}>
+    <div className="page-container">
       <div className="page-header">
         <Link to="/" className="back-button">←</Link>
         <h1>{currentTexts.title}</h1>
-        <div className="header-controls">
-          <button onClick={toggleDarkMode} className="mode-toggle">
-            {isDarkMode ? '🌞' : '🌙'}
-          </button>
-        </div>
       </div>
       
       <div className="page-content">

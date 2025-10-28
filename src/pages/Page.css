@@ -1,8 +1,28 @@
-/* 기존 내용은 모두 지우고 아래 내용으로 교체해주세요. */
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 50px 20px;
+  background-color: var(--bg-primary);
+  min-height: calc(100vh - 80px);
+  transition: background-color 0.3s ease;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.back-button {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: var(--text-primary);
 }
 
 .page-title-section {
@@ -10,16 +30,19 @@
   margin-bottom: 50px;
 }
 
+.page-title-section h1,
 .page-title-section h2 {
   font-size: 2.5em;
   font-weight: 700;
-  color: #2c3e50;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .page-title-section p {
   font-size: 1.2em;
-  color: #6c757d;
+  color: var(--text-secondary);
   margin-top: 10px;
+  transition: color 0.3s ease;
 }
 
 .page-content {
@@ -29,24 +52,25 @@
 }
 
 .info-card {
-  background-color: white;
+  background-color: var(--bg-primary);
   padding: 30px;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-color);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px var(--shadow);
 }
 
 .info-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 30px var(--shadow);
 }
 
 .card-icon {
   font-size: 1.5em;
-  color: #1abc9c;
+  color: var(--accent-color);
   margin-bottom: 20px;
-  background-color: #eafaf1;
+  background-color: var(--bg-secondary);
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -54,6 +78,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 500;
+  transition: background-color 0.3s ease;
 }
 
 .info-card h3 {
@@ -61,14 +86,18 @@
   margin-bottom: 10px;
   font-size: 1.4em;
   font-weight: 700;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .info-card p {
-  color: #555;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-size: 0.95em;
+  transition: color 0.3s ease;
 }
 
+/* Q&A 페이지 스타일 */
 .qa-page .page-content {
   max-width: 800px;
   margin: 0 auto;
@@ -76,23 +105,27 @@
 }
 
 .qa-card {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 15px var(--shadow);
   padding: 2.5rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .qa-title {
-  color: #2d3748;
+  color: var(--text-primary);
   font-size: 1.8rem;
   margin-bottom: 0.8rem;
+  transition: color 0.3s ease;
 }
 
 .qa-description {
-  color: #4a5568;
+  color: var(--text-secondary);
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  transition: color 0.3s ease;
 }
 
 .question-form {
@@ -104,24 +137,26 @@
 .question-input {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 1rem;
   line-height: 1.5;
   resize: none;
-  transition: border-color 0.2s ease;
+  transition: all 0.3s ease;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .question-input:focus {
   outline: none;
-  border-color: #4299e1;
-  box-shadow: 0 0 0 3px rgba(66,153,225,0.1);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.1);
 }
 
 .submit-button {
   align-self: flex-end;
   padding: 0.8rem 2rem;
-  background: #4299e1;
+  background: var(--accent-color);
   color: white;
   border: none;
   border-radius: 6px;
@@ -132,12 +167,12 @@
 }
 
 .submit-button:disabled {
-  background: #a0aec0;
+  background: var(--text-secondary);
   cursor: not-allowed;
 }
 
 .submit-button:not(:disabled):hover {
-  background: #3182ce;
+  opacity: 0.9;
 }
 
 .questions-list {
@@ -149,9 +184,10 @@
 
 .question-item {
   padding: 1.5rem;
-  background: #f7fafc;
+  background: var(--bg-secondary);
   border-radius: 8px;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
 .question-item:hover {
@@ -159,13 +195,47 @@
 }
 
 .question-text {
-  color: #2d3748;
+  color: var(--text-primary);
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .answer-text {
-  color: #4a5568;
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+/* 폼 요소들 */
+input, textarea, select {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  background-color: var(--text-secondary);
+  cursor: not-allowed;
 }
